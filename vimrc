@@ -56,6 +56,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'sheerun/vim-polyglot'
 	Plug 'sainnhe/gruvbox-material'
 	Plug 'wadackel/vim-dogrun'
+	Plug 'dense-analysis/ale'
 call plug#end()
 
 "vim-gutentags setting
