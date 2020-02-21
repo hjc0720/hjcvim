@@ -57,6 +57,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'sainnhe/gruvbox-material'
 	Plug 'wadackel/vim-dogrun'
 	Plug 'dense-analysis/ale'
+	Plug 'octol/vim-cpp-enhanced-highlight'
 call plug#end()
 
 "vim-gutentags setting
@@ -119,6 +120,11 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
 
+"cpp highlight
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+
 "gruvbox
 "set termguicolors
 set background=dark
@@ -129,3 +135,4 @@ set term=screen-256color
 "set term=screen
 
 colorscheme gruvbox-material
+
