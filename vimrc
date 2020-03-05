@@ -22,6 +22,13 @@ set shiftwidth=4
 set tabstop=4
 set smarttab
 
+set autochdir
+set winaltkeys=no
+
+set nowrap
+
+let mapleader = ","
+
 "load plugin
 
 function! BuildYCM(info)
@@ -44,7 +51,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'kana/vim-textobj-function',{'for':['c','cpp','vim','java']}
 	Plug 'sgur/vim-textobj-parameter'
 	Plug 'octol/vim-cpp-enhanced-highlight'
-	Plug 'Yggdroot/LeaderF'
+	Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 	Plug 'vim-scripts/a.vim'
 	Plug 'vimwiki/vimwiki'
 	Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
@@ -56,10 +63,21 @@ call plug#begin('~/.vim/plugged')
 	Plug 'sheerun/vim-polyglot'
 	Plug 'sainnhe/gruvbox-material'
 	Plug 'wadackel/vim-dogrun'
-	Plug 'dense-analysis/ale'
+	"Plug 'dense-analysis/ale'
 	Plug 'octol/vim-cpp-enhanced-highlight'
+	"括号补全
+	Plug 'scrooloose/nerdcommenter'
+	Plug 'luochen1990/rainbow'
 call plug#end()
-
+" scrooloose/nerdcommenter 
+"<leader>cc   加注释
+"<leader>cu   解开注释
+"<leader>c<space>  加上/解开注释, 智能判断
+"<leader>cy   先复制, 再注解(p可以进行黏贴)
+" 注释的时候自动加个空格, 强迫症必配
+"let g:NERDSpaceDelims=1
+"rainbow
+let g:rainbow_active = 1 
 "vim-gutentags setting
 let g:gutentags_project_root = ['.root','.svn','.git','.project']
 let g:gutentags_ctags_tagfile='.tags'
@@ -88,13 +106,14 @@ let g:ycm_collect_identifiers_from_comments_and_strings=1
 let g:ycm_complete_in_strings=1
 let g:ycm_key_invoke_completion='<c-z>'
 set completeopt=menu,menuone
+nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "noremap <c-z> <NOP>
 "leaderF
 let g:Lf_ShortcutF='<c-p>'
 let g:Lf_ShortcutB='<m-n>'
 noremap <c-n> :LeaderfMrc<cr>
-noremap <A-p> :LeaderfFunction!<cr>
+noremap <c-p> :LeaderfFunction!<cr>
 noremap <m-n> :LeaderfBuffer<cr>
 
 let g:Lf_StlSeparator={'left':'','right':'','front':''}
@@ -123,15 +142,20 @@ let g:airline#extensions#tabline#formatter = 'default'
 "cpp highlight
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
+"let g:cpp_class_decl_highlight = 1
+
+"ale
+nmap <Leader>s :ALEToggle<CR>
+"rainbow
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
 "gruvbox
 "set termguicolors
 set background=dark
 let g:gruvbox_material_background='hard'
 
-set term=screen-256color
-"set t_Co=256
+"set term=screen-256color
+set t_Co=256
 "set term=screen
 
 colorscheme gruvbox-material
