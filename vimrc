@@ -11,16 +11,23 @@ set encoding=utf-8
 set fileencodings=ucs-bom,utf-bom,utf-8,cp936,big5,gbk
 set hidden
 set showmatch
+"search
 set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+
 set nofoldenable
 
-set autoindent
 set shiftwidth=4
 set tabstop=4
 set smarttab
+
+"c++缩进
+set autoindent
+set cindent
+set smartindent
+set cinoptions+=g0
 
 set autochdir
 set winaltkeys=no
@@ -59,12 +66,12 @@ call plug#begin('~/.vim/plugged')
 	Plug 'Shougo/echodoc.vim'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
+	Plug 'enricobacis/vim-airline-clock'
 	Plug 'tpope/vim-surround'
 	Plug 'sheerun/vim-polyglot'
 	Plug 'sainnhe/gruvbox-material'
 	Plug 'wadackel/vim-dogrun'
 	"Plug 'dense-analysis/ale'
-	Plug 'octol/vim-cpp-enhanced-highlight'
 	"括号补全
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'luochen1990/rainbow'
@@ -102,9 +109,11 @@ let g:ycm_add_preview_to_completeopt=0
 let g:ycm_show_diagnostics_ui=0
 let g:ycm_server_log_level='info'
 let g:ycm_min_num_identifier_candiadate_chars=2
+let g:ycm_complete_in_strings = 1
+let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings=1
-let g:ycm_complete_in_strings=1
-let g:ycm_key_invoke_completion='<c-z>'
+let g:ycm_key_invoke_completion='<C-k>'
+let g:ycm_confirm_extra_conf = 0
 set completeopt=menu,menuone
 nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
@@ -133,16 +142,20 @@ let g:ycm_semantic_triggers={
 			\}
 
 "airline
-let g:airline_theme='simple'
+let g:airline_theme='dark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'default'
+set laststatus=2
+
+nnoremap [b :bp<CR>
+nnoremap ]b :bn<CR>
 
 "cpp highlight
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
-"let g:cpp_class_decl_highlight = 1
+let g:cpp_class_decl_highlight = 1
 
 "ale
 nmap <Leader>s :ALEToggle<CR>
@@ -160,3 +173,38 @@ set t_Co=256
 
 colorscheme gruvbox-material
 
+"self function 添加作者信息
+function AddTitle()
+    call append(0,"/********************************************************************************/")
+    call append(1,"//作者       :	黄建超														    /")
+    call append(2,"//create:	".strftime("%Y-%m-%d %H:%M"))
+    call append(3,"//Last modified:	".strftime("%Y-%m-%d %H:%M"))
+    call append(3,"//Filename     :	".expand("%:t"))
+    call append(5,"/********************************************************************************/")
+    echohl WarningMsg | echo "Successful in adding copyright." | echohl None
+endf
+ 
+function UpdateTitle()
+     normal m'
+     execute '/Last modified/s@:.*$@\=strftime(":\t%Y-%m-%d %H:%M")  @'
+     normal ''
+     normal mk
+     execute '/Filename/s@:.*$@\=":\t".expand("%:t")@'
+     execute "noh"
+     normal 'k
+     echohl WarningMsg | echo "Successful in updating the copyright." | echohl None
+endfunction
+function Title()
+    let n = 1
+    while n < 6
+        let line = getline(n)
+        if line =~ '^\s*\S*Last\smodified\S*.*$'
+            call UpdateTitle()
+            return
+        endif
+        let n = n + 1
+    endwhile
+    call AddTitle()
+endfunction
+
+nnoremap <leader>at :call Title()<CR>
