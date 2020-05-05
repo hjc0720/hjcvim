@@ -28,6 +28,7 @@ set autoindent
 set cindent
 set smartindent
 set cinoptions+=g0
+set textwidth=120
 
 set autochdir
 set winaltkeys=no
@@ -75,6 +76,19 @@ call plug#begin('~/.vim/plugged')
 	"括号补全
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'luochen1990/rainbow'
+	Plug 'jiangmiao/auto-pairs'
+	Plug 'tpope/vim-repeat'
+	"代码对齐
+	Plug 'godlygeek/tabular'
+	Plug 'mattn/emmet-vim'
+	" js支持
+	Plug 'pangloss/vim-javascript'
+	"python支持
+	"python语法高亮
+	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+	Plug 'Vimjas/vim-python-pep8-indent'
+	Plug 'dense-analysis/ale'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
@@ -159,6 +173,13 @@ let g:cpp_class_decl_highlight = 1
 
 "ale
 nmap <Leader>s :ALEToggle<CR>
+let g:ale linters = {
+	\ 'python': ['flake8', 'pylint'],
+	\}
+
+let g:ale_fixers = {
+			\ 'python': [ 'yapf' ],
+			\}
 "rainbow
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
@@ -208,3 +229,21 @@ function Title()
 endfunction
 
 nnoremap <leader>at :call Title()<CR>
+
+"Plug 'godlygeek/tabular'
+",a= 按=号对齐
+",a:按：号对齐
+",a,按,号对齐
+
+if exists(":Tabularize")
+	nmap <Leader>a= :Tabularize /=<CR>
+	vmap <Leader>a= :Tabularize /=<CR>
+	nmap <Leader>a: :Tabularize /:<CR>
+	nmap <Leader>a: :Tabularize /:<CR>
+	vmap <Leader>a, :Tabularize /,<CR>
+	vmap <Leader>a, :Tabularize /,<CR>
+endif
+
+"mattn/emmet-vim
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
