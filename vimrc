@@ -50,6 +50,9 @@ function! BuildYCM(info)
 endfunction
 
 call plug#begin('~/.vim/plugged')
+"common
+	Plug 'sirver/ultisnips'
+	Plug 'honza/vim-snippets'
 	Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
 	Plug 'ludovicchabant/vim-gutentags',{'for':['c','cpp','java']}
 	Plug 'mhinz/vim-signify'
@@ -87,8 +90,10 @@ call plug#begin('~/.vim/plugged')
 	"python语法高亮
 	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 	Plug 'Vimjas/vim-python-pep8-indent'
-	Plug 'dense-analysis/ale'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	"Plug 'dense-analysis/ale'
+	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	"latex
+	Plug 'lervag/vimtex'
 call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
@@ -172,14 +177,14 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 
 "ale
-nmap <Leader>s :ALEToggle<CR>
-let g:ale linters = {
-	\ 'python': ['flake8', 'pylint'],
-	\}
+"nmap <Leader>s :ALEToggle<CR>
+"let g:ale linters = {
+	"\ 'python': ['flake8', 'pylint'],
+	"\}
 
-let g:ale_fixers = {
-			\ 'python': [ 'yapf' ],
-			\}
+"let g:ale_fixers = {
+			"\ 'python': [ 'yapf' ],
+			"\}
 "rainbow
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
@@ -247,3 +252,13 @@ endif
 "mattn/emmet-vim
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+"latex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+let conceallevel=1
+let g:tex_conceal='abdmg'
+"UltiSnips
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<tab>'
