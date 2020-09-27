@@ -1,4 +1,5 @@
 "some base setting
+set guifont=Monospace\ 8
 set tags=./.tags;,.tags
 set noshowmode
 set number
@@ -45,7 +46,7 @@ function! BuildYCM(info)
   " - status: 'installed', 'updated', or 'unchanged'
   " - force:  set on PlugInstall! or PlugUpdate!
   if a:info.status == 'installed' || a:info.force
-    !./install.py
+    !./install.py --all
   endif
 endfunction
 
@@ -53,6 +54,7 @@ call plug#begin('~/.vim/plugged')
 "common
 	Plug 'sirver/ultisnips'
 	Plug 'honza/vim-snippets'
+
 	Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
 	Plug 'ludovicchabant/vim-gutentags',{'for':['c','cpp','java']}
 	Plug 'mhinz/vim-signify'
@@ -75,6 +77,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'sheerun/vim-polyglot'
 	Plug 'sainnhe/gruvbox-material'
 	Plug 'wadackel/vim-dogrun'
+	"动态检查
 	"Plug 'dense-analysis/ale'
 	"括号补全
 	Plug 'scrooloose/nerdcommenter'
@@ -90,10 +93,11 @@ call plug#begin('~/.vim/plugged')
 	"python语法高亮
 	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 	Plug 'Vimjas/vim-python-pep8-indent'
-	"Plug 'dense-analysis/ale'
 	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	"latex
 	Plug 'lervag/vimtex'
+	"glsl
+	Plug 'tikhomirov/vim-glsl'
 call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
@@ -124,25 +128,31 @@ endif
 set signcolumn=yes
 
 "ycm
-let g:ycm_add_preview_to_completeopt=0
-let g:ycm_show_diagnostics_ui=0
+"let g:ycm_add_preview_to_completeopt=0
+"let g:ycm_show_diagnostics_ui=0
 let g:ycm_server_log_level='info'
 let g:ycm_min_num_identifier_candiadate_chars=2
 let g:ycm_complete_in_strings = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_collect_identifiers_from_comments_and_strings=1
 let g:ycm_key_invoke_completion='<C-k>'
-let g:ycm_confirm_extra_conf = 0
-set completeopt=menu,menuone
+"let g:ycm_confirm_extra_conf = 0
+"set completeopt=menu,menuone
 nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+let g:ycm_semantic_triggers={
+			\'c,cpp,python,java,go,perl':['re!\w{2}'],
+			\'cs,lua,javascript':['re!\w{2}'],
+			\}
 
 "noremap <c-z> <NOP>
 "leaderF
 let g:Lf_ShortcutF='<c-p>'
 let g:Lf_ShortcutB='<m-n>'
 noremap <c-n> :LeaderfMrc<cr>
-noremap <c-p> :LeaderfFunction!<cr>
+noremap <m-m> :LeaderfFunction<cr>
 noremap <m-n> :LeaderfBuffer<cr>
+noremap <Leader>O :LeaderfFile<cr>
 
 let g:Lf_StlSeparator={'left':'','right':'','front':''}
 
@@ -153,12 +163,8 @@ let g:Lf_ShowRelativePath=0
 "let g:Lf_HideHelp=1
 let g:Lf_StlColorscheme='powerline'
 let g:Lf_PreviewResult={'Function':0,'BufTag':0}
-noremap <a-m> :LeaderfTag<cr>
+noremap <Leader>S :LeaderfTag<cr>
 
-let g:ycm_semantic_triggers={
-			\'c,cpp,python,java,go,perl':['re!\w{2}'],
-			\'cs,lua,javascript':['re!\w{2}'],
-			\}
 
 "airline
 let g:airline_theme='dark'
@@ -177,6 +183,10 @@ let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 
 "ale
+"let g:ale_lint_on_text_changed='normal'
+"let g:ale_lint_on_insert_leave=1
+"let g_airline#externsion#ale#enabled=1
+"let g:ale_cpp_gcc_options='-Wall -O2 -std=c++17'
 "nmap <Leader>s :ALEToggle<CR>
 "let g:ale linters = {
 	"\ 'python': ['flake8', 'pylint'],
@@ -259,6 +269,14 @@ let g:vimtex_quickfix_mode=0
 let conceallevel=1
 let g:tex_conceal='abdmg'
 "UltiSnips
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<tab>'
-let g:UltiSnipsJumpBackwardTrigger='<tab>'
+let g:UltiSnipsExpandTrigger='<c-e>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+"let g:UltiSnipsSnippetDirectories=['UltiSnips', 'plugged/vim-snippets/UltiSnips']
+let g:UltiSnipsEditSplit="vertical"
+"let g:UltiSnipsUsePythonVersion=3
+"a.vim
+nnoremap <silent> <m-o> :A<CR>
+"glsl
+"add vs ps as glsl
+autocmd! BufNewFile,BufRead *.vs,*.ps,*.gs set ft=glsl
