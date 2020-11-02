@@ -91,7 +91,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'pangloss/vim-javascript'
 	"python支持
 	"python语法高亮
-	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins','for':'python'}
 	Plug 'Vimjas/vim-python-pep8-indent'
 	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	"latex
