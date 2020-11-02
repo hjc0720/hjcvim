@@ -153,6 +153,7 @@ noremap <c-n> :LeaderfMrc<cr>
 noremap <m-m> :LeaderfFunction<cr>
 noremap <m-n> :LeaderfBuffer<cr>
 noremap <m-O> :LeaderfFile<cr>
+noremap <m-S> :LeaderfTag<cr>
 
 let g:Lf_StlSeparator={'left':'','right':'','front':''}
 
@@ -163,7 +164,6 @@ let g:Lf_ShowRelativePath=0
 "let g:Lf_HideHelp=1
 let g:Lf_StlColorscheme='powerline'
 let g:Lf_PreviewResult={'Function':0,'BufTag':0}
-noremap <Leader>S :LeaderfTag<cr>
 
 
 "airline
