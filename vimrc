@@ -39,6 +39,13 @@ set nowrap
 let mapleader = ","
 
 "load plugin
+"polyglot 要求放到加载之前
+"postscr跟ps冲突
+let g:polyglot_disable = ['postscr']
+"glsl
+"add vs ps as glsl
+autocmd BufNewFile,BufRead *.vs,*.ps,*.gs set ft=glsl
+autocmd BufNewFile,BufRead *.VS,*.PS,*.GS set ft=glsl
 
 function! BuildYCM(info)
   " info is a dictionary with 3 fields
@@ -278,7 +285,3 @@ let g:UltiSnipsEditSplit="vertical"
 "let g:UltiSnipsUsePythonVersion=3
 "a.vim
 nnoremap <silent> <m-o> :A<CR>
-"glsl
-"add vs ps as glsl
-autocmd BufNewFile,BufRead *.vs,*.ps,*.gs set ft=glsl
-autocmd BufNewFile,BufRead *.VS,*.PS,*.GS set ft=glsl
