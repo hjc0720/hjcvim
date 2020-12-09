@@ -74,6 +74,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'vim-airline/vim-airline-themes'
 	Plug 'enricobacis/vim-airline-clock'
 	Plug 'tpope/vim-surround'
+	"语法高亮，包含了主流的语言的语法高亮
 	Plug 'sheerun/vim-polyglot'
 	Plug 'sainnhe/gruvbox-material'
 	Plug 'wadackel/vim-dogrun'
@@ -97,8 +98,8 @@ call plug#begin('~/.vim/plugged')
 	"latex
 	Plug 'lervag/vimtex'
 	"glsl
-	Plug 'tikhomirov/vim-glsl'
-call plug#end()
+	"Plug 'tikhomirov/vim-glsl'
+	call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
 "<leader>cu   解开注释
@@ -279,4 +280,5 @@ let g:UltiSnipsEditSplit="vertical"
 nnoremap <silent> <m-o> :A<CR>
 "glsl
 "add vs ps as glsl
-autocmd! BufNewFile,BufRead *.vs,*.ps,*.gs set ft=glsl
+autocmd BufNewFile,BufRead *.vs,*.ps,*.gs set ft=glsl
+autocmd BufNewFile,BufRead *.VS,*.PS,*.GS set ft=glsl
