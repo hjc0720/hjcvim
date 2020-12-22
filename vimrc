@@ -83,7 +83,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-surround'
 	"语法高亮，包含了主流的语言的语法高亮
 	Plug 'sheerun/vim-polyglot'
-	Plug 'sainnhe/gruvbox-material'
+	Plug 'morhetz/gruvbox'
 	Plug 'wadackel/vim-dogrun'
 	"动态检查
 	"Plug 'dense-analysis/ale'
@@ -184,6 +184,7 @@ set laststatus=2
 
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
+nnoremap <c-tab> :bn<CR>
 
 "cpp highlight
 let g:cpp_class_scope_highlight = 1
@@ -209,13 +210,13 @@ let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 "gruvbox
 "set termguicolors
 set background=dark
-let g:gruvbox_material_background='hard'
+"let g:gruvbox_material_background='hard'
 
 "set term=screen-256color
-set t_Co=256
+"set t_Co=256
 "set term=screen
-
-colorscheme gruvbox-material
+"let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
 
 "self function 添加作者信息
 function AddTitle()
@@ -285,3 +286,6 @@ let g:UltiSnipsEditSplit="vertical"
 "let g:UltiSnipsUsePythonVersion=3
 "a.vim
 nnoremap <silent> <m-o> :A<CR>
+
+"c++ lambda缩进不正确
+autocmd FileType cpp setlocal cino+=g-1,j1,(0,ws,Ws,N+s,t0,g0,+0
