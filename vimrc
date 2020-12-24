@@ -1,5 +1,5 @@
 "some base setting
-set guifont=Monospace\ 8
+set guifont=Monospace\ 12
 set tags=./.tags;,.tags
 set noshowmode
 set number
@@ -32,6 +32,7 @@ set cinoptions+=g0
 set textwidth=120
 
 set autochdir
+set autowrite
 set winaltkeys=no
 
 set nowrap
@@ -302,3 +303,9 @@ nnoremap <Leader>o :A<CR>
 
 "c++ lambda缩进不正确
 autocmd FileType cpp setlocal cino+=g-1,j1,(0,ws,Ws,N+s,t0,g0,+0
+"function! ResetMakeprg()
+	"let cpunum = system("grep -c ^processor /proc/cpuinfo ")
+	"let &makeprg= 'make -j ' . cpunum 
+"endfunction
+
+"autocmd FileType c,cpp call ResetMakeprg()
