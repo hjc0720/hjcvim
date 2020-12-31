@@ -74,8 +74,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 	Plug 'vim-scripts/a.vim'
 	Plug 'vimwiki/vimwiki'
-	Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
-	Plug 'vim-latex/vim-latex',{'for':'tex'}
+"	Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+"	Plug 'vim-latex/vim-latex',{'for':'tex'}
 	Plug 'Shougo/echodoc.vim'
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
@@ -101,9 +101,10 @@ call plug#begin('~/.vim/plugged')
 	"python语法高亮
 	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins','for':'python'}
 	Plug 'Vimjas/vim-python-pep8-indent'
-	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	"latex
 	Plug 'lervag/vimtex'
+	"latex自动补全插件
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	"glsl
 	"Plug 'tikhomirov/vim-glsl'
 	call plug#end()
@@ -259,14 +260,12 @@ nnoremap <leader>at :call Title()<CR>
 ",a:按：号对齐
 ",a,按,号对齐
 
-if exists(":Tabularize")
-	nmap <Leader>a= :Tabularize /=<CR>
-	vmap <Leader>a= :Tabularize /=<CR>
-	nmap <Leader>a: :Tabularize /:<CR>
-	nmap <Leader>a: :Tabularize /:<CR>
-	vmap <Leader>a, :Tabularize /,<CR>
-	vmap <Leader>a, :Tabularize /,<CR>
-endif
+nmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a= :Tabularize /=<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
 
 "mattn/emmet-vim
 let g:user_emmet_install_global = 0
@@ -274,9 +273,22 @@ autocmd FileType html,css EmmetInstall
 "latex
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
+let g:vimtex_view_general_viewer='zathura'
 let g:vimtex_quickfix_mode=0
 let conceallevel=1
 let g:tex_conceal='abdmg'
+let g:vimtex_compiler_progname='nvr'
+let g:vimtex_toc_config = {
+\ 'name' : 'TOC',
+\ 'layers' : ['content', 'todo', 'include'],
+\ 'split_width' : 25,
+\ 'todo_sorted' : 0,
+\ 'show_help' : 1,
+\ 'show_numbers' : 1,
+\}
+nnoremap <F3> :VimtexTocToggle<CR>
+let maplocalleader=","
+
 "UltiSnips
 let g:UltiSnipsExpandTrigger='<c-e>'
 let g:UltiSnipsJumpForwardTrigger='<c-b>'
@@ -286,6 +298,7 @@ let g:UltiSnipsEditSplit="vertical"
 "let g:UltiSnipsUsePythonVersion=3
 "a.vim
 nnoremap <silent> <m-o> :A<CR>
+nnoremap <Leader>o :A<CR>
 
 "c++ lambda缩进不正确
 autocmd FileType cpp setlocal cino+=g-1,j1,(0,ws,Ws,N+s,t0,g0,+0
