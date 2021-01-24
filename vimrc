@@ -107,6 +107,8 @@ call plug#begin('~/.vim/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	"glsl
 	"Plug 'tikhomirov/vim-glsl'
+	"git plugin
+	Plug 'tpope/vim-fugitive'
 	call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
