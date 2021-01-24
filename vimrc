@@ -1,5 +1,5 @@
 "some base setting
-set guifont=Monospace\ 8
+set guifont=Monospace\ 10
 set tags=./.tags;,.tags
 set noshowmode
 set number
@@ -32,6 +32,7 @@ set cinoptions+=g0
 set textwidth=120
 
 set autochdir
+set autowrite
 set winaltkeys=no
 
 set nowrap
@@ -107,6 +108,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	"glsl
 	"Plug 'tikhomirov/vim-glsl'
+	Plug 'mildred/vim-bufmru'
 	"git plugin
 	Plug 'tpope/vim-fugitive'
 	call plug#end()
@@ -187,7 +189,8 @@ set laststatus=2
 
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
-nnoremap <c-tab> :bn<CR>
+nnoremap <c-tab> :BufMRUNext<CR>
+map <S-Tab> :BufMRUPrev<CR>
 
 "cpp highlight
 let g:cpp_class_scope_highlight = 1
@@ -304,3 +307,9 @@ nnoremap <Leader>o :A<CR>
 
 "c++ lambda缩进不正确
 autocmd FileType cpp setlocal cino+=g-1,j1,(0,ws,Ws,N+s,t0,g0,+0
+function! ResetMakeprg()
+	let cpunum = system("grep -c ^processor /proc/cpuinfo ")
+	let &makeprg= 'make -j ' . cpunum 
+endfunction
+
+autocmd FileType c,cpp call ResetMakeprg()
