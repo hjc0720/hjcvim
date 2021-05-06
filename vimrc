@@ -1,5 +1,5 @@
 "some base setting
-set guifont=Monospace\ 10
+set guifont=Monospace\ 9
 set tags=./.tags;,.tags
 set noshowmode
 set number
@@ -104,8 +104,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'Vimjas/vim-python-pep8-indent'
 	"latex
 	Plug 'lervag/vimtex'
-	"latex自动补全插件
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	"glsl
 	"Plug 'tikhomirov/vim-glsl'
 	Plug 'mildred/vim-bufmru'
@@ -313,3 +312,4 @@ function! ResetMakeprg()
 endfunction
 
 autocmd FileType c,cpp call ResetMakeprg()
+set nobackup
