@@ -103,13 +103,17 @@ call plug#begin('~/.vim/plugged')
 	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins','for':'python'}
 	Plug 'Vimjas/vim-python-pep8-indent'
 	"latex
-	Plug 'lervag/vimtex'
+	Plug 'lervag/vimtex',{'for':'tex'}
 	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	"glsl
 	"Plug 'tikhomirov/vim-glsl'
 	Plug 'mildred/vim-bufmru'
 	"git plugin
 	Plug 'tpope/vim-fugitive'
+	"vue
+	Plug 'posva/vim-vue'
+	Plug 'vim-syntastic/syntastic',{'for':'vue'}
+	Plug 'MaraniMatias/vue-formatter',{'for':'vue'}
 	call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
@@ -304,6 +308,8 @@ let g:UltiSnipsEditSplit="vertical"
 nnoremap <silent> <m-o> :A<CR>
 nnoremap <Leader>o :A<CR>
 
+"vue
+let g:syntastic_javascript_checkers=['eslint']
 "c++ lambda缩进不正确
 autocmd FileType cpp setlocal cino+=g-1,j1,(0,ws,Ws,N+s,t0,g0,+0
 function! ResetMakeprg()
