@@ -22,7 +22,8 @@ set nofoldenable
 
 set shiftwidth=4
 set tabstop=4
-set smarttab
+set noexpandtab
+"set smarttab
 
 "c++缩进
 set autoindent
@@ -33,6 +34,7 @@ set textwidth=120
 
 set autochdir
 set autowrite
+set autoread
 set winaltkeys=no
 
 set nowrap
@@ -63,7 +65,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'sirver/ultisnips'
 	Plug 'honza/vim-snippets'
 
-	Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
+	"Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
 	Plug 'ludovicchabant/vim-gutentags',{'for':['c','cpp','java']}
 	Plug 'mhinz/vim-signify'
 	Plug 'kana/vim-textobj-user'
@@ -105,11 +107,13 @@ call plug#begin('~/.vim/plugged')
 	"latex
 	Plug 'lervag/vimtex',{'for':'tex'}
 	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'neoclide/coc.nvim', {'branch': 'release','do':{ -> coc#util#install() }}
 	"glsl
 	"Plug 'tikhomirov/vim-glsl'
 	Plug 'mildred/vim-bufmru'
 	"git plugin
 	Plug 'tpope/vim-fugitive'
+	Plug 'hjc0720/qssvim'
 	"vue
 	Plug 'posva/vim-vue'
 	Plug 'vim-syntastic/syntastic',{'for':'vue'}
@@ -144,22 +148,22 @@ endif
 set signcolumn=yes
 
 "ycm
-let g:ycm_add_preview_to_completeopt=0
-"let g:ycm_show_diagnostics_ui=0
-let g:ycm_server_log_level='info'
-let g:ycm_min_num_identifier_candiadate_chars=2
-let g:ycm_complete_in_strings = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_collect_identifiers_from_comments_and_strings=1
-let g:ycm_key_invoke_completion='<C-k>'
-let g:ycm_confirm_extra_conf = 0
-set completeopt=menu,menuone
-nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+"let g:ycm_add_preview_to_completeopt=0
+""let g:ycm_show_diagnostics_ui=0
+"let g:ycm_server_log_level='info'
+"let g:ycm_min_num_identifier_candiadate_chars=2
+"let g:ycm_complete_in_strings = 1
+"let g:ycm_complete_in_comments = 1
+"let g:ycm_collect_identifiers_from_comments_and_strings=1
+"let g:ycm_key_invoke_completion='<C-k>'
+"let g:ycm_confirm_extra_conf = 0
+"set completeopt=menu,menuone
+"nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-let g:ycm_semantic_triggers={
-			\'c,cpp,python,java,go,perl':['re!\w{2}'],
-			\'cs,lua,javascript':['re!\w{2}'],
-			\}
+"let g:ycm_semantic_triggers={
+			"\'c,cpp,python,java,go,perl':['re!\w{2}'],
+			"\'cs,lua,javascript':['re!\w{2}'],
+			"\}
 
 "noremap <c-z> <NOP>
 "leaderF
@@ -222,7 +226,7 @@ set background=dark
 "let g:gruvbox_material_background='hard'
 
 "set term=screen-256color
-"set t_Co=256
+set t_Co=256
 "set term=screen
 "let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
@@ -285,7 +289,7 @@ let g:vimtex_view_general_viewer='zathura'
 let g:vimtex_quickfix_mode=0
 let conceallevel=1
 let g:tex_conceal='abdmg'
-let g:vimtex_compiler_progname='nvr'
+"let g:vimtex_compiler_progname='nvr'
 let g:vimtex_toc_config = {
 \ 'name' : 'TOC',
 \ 'layers' : ['content', 'todo', 'include'],
@@ -319,3 +323,29 @@ endfunction
 
 autocmd FileType c,cpp call ResetMakeprg()
 set nobackup
+
+"coc.nvim
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+	if (index(['vim','help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	else
+		call CocAction('doHover')
+	endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+nmap <leader>rn <Plug>(coc-rename)
+
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
