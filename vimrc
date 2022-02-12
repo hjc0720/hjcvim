@@ -76,7 +76,6 @@ call plug#begin('~/.vim/plugged')
 	Plug 'octol/vim-cpp-enhanced-highlight'
 	Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 	Plug 'vim-scripts/a.vim'
-	Plug 'vimwiki/vimwiki'
 "	Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 "	Plug 'vim-latex/vim-latex',{'for':'tex'}
 	Plug 'Shougo/echodoc.vim'
@@ -118,6 +117,17 @@ call plug#begin('~/.vim/plugged')
 	Plug 'posva/vim-vue'
 	Plug 'vim-syntastic/syntastic',{'for':'vue'}
 	Plug 'MaraniMatias/vue-formatter',{'for':'vue'}
+	"md
+	Plug 'plasticboy/vim-markdown'
+	"生成md 目录
+	":GenTocMarked生成目录
+	":UpdateToc更新目录
+	Plug 'mzlogin/vim-markdown-toc'
+	" 打开/关闭预览
+	":MarkdownPreviewToggel
+	Plug 'iamcco/markdown-preview.vim'
+	"启动界面
+	Plug 'mhinz/vim-startify'
 	call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
@@ -349,3 +359,6 @@ nmap <leader>rn <Plug>(coc-rename)
 
 xmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
+"md
+let g:vim_markdown_math = 1
+autocmd FileType markdown map <F5> :MarkdownPreview<CR>
