@@ -9,7 +9,7 @@ set history=1000
 set nocompatible
 filetype plugin indent on
 set encoding=utf-8
-set fileencodings=ucs-bom,utf-bom,utf-8,cp936,big5,gbk
+set fileencodings=ucs-bom,utf-bom,utf-8,cp936,big5,gbk,utf16
 set hidden
 set showmatch
 "search
@@ -74,7 +74,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'kana/vim-textobj-function',{'for':['c','cpp','vim','java']}
 	Plug 'sgur/vim-textobj-parameter'
 	Plug 'octol/vim-cpp-enhanced-highlight'
-	Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+	Plug 'Yggdroot/LeaderF', { 'do': ':LeaderfInstallCExtension' }
 	Plug 'vim-scripts/a.vim'
 "	Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 "	Plug 'vim-latex/vim-latex',{'for':'tex'}
@@ -128,6 +128,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'iamcco/markdown-preview.vim'
 	"启动界面
 	Plug 'mhinz/vim-startify'
+	Plug 'neomake/neomake'
 	call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
@@ -179,21 +180,22 @@ set signcolumn=yes
 "leaderF
 let g:Lf_ShortcutF='<c-p>'
 let g:Lf_ShortcutB='<m-n>'
+let g:Lf_WindowPosition='popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_DefaultMode='NameOnly'
 noremap <c-n> :LeaderfMrc<cr>
 noremap <m-m> :LeaderfFunction<cr>
 noremap <m-n> :LeaderfBuffer<cr>
 noremap <m-O> :LeaderfFile<cr>
 noremap <m-S> :LeaderfTag<cr>
 
-let g:Lf_StlSeparator={'left':'','right':'','front':''}
+"let g:Lf_StlSeparator={'left':'','right':'','front':''}
 
-let g:Lf_RootMarkers=['.project','.root','.git']
 let g:Lf_WorkingDirectoryMode='Ac'
 let g:Lf_CachedDirectory=expand('~/.vim/cache')
 let g:Lf_ShowRelativePath=0
 "let g:Lf_HideHelp=1
-let g:Lf_StlColorscheme='powerline'
-let g:Lf_PreviewResult={'Function':0,'BufTag':0}
+"let g:Lf_PreviewResult={'Function':0,'BufTag':0}
 
 
 "airline
@@ -362,3 +364,9 @@ nmap <leader>f <Plug>(coc-format-selected)
 "md
 let g:vim_markdown_math = 1
 autocmd FileType markdown map <F5> :MarkdownPreview<CR>
+"neomake
+call neomake#configure#disable_automake()
+let g:neomake_open_list = 2
+
+set shiftwidth=4
+set tabstop=4

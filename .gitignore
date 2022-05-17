@@ -1,3 +1,6 @@
 plugged
 *.swp
 .netrwhist
+*.swo
+*.swn
+*.swm
