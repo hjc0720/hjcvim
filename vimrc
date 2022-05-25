@@ -330,7 +330,7 @@ let g:syntastic_javascript_checkers=['eslint']
 autocmd FileType cpp setlocal cino+=g-1,j1,(0,ws,Ws,N+s,t0,g0,+0
 function! ResetMakeprg()
 	let cpunum = system("grep -c ^processor /proc/cpuinfo ")
-	let &makeprg= 'make -j ' . cpunum 
+	let &makeprg= 'make $* -j' . cpunum 
 endfunction
 
 autocmd FileType c,cpp call ResetMakeprg()
