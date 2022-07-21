@@ -18,11 +18,11 @@ set hlsearch
 set ignorecase
 set smartcase
 
-set nofoldenable
-
 set shiftwidth=4
 set tabstop=4
 set noexpandtab
+
+set foldmethod=indent
 "set smarttab
 
 "c++缩进
@@ -334,6 +334,18 @@ function! ResetMakeprg()
 endfunction
 
 autocmd FileType c,cpp call ResetMakeprg()
+
+packadd termdebug
+let g:termdebug_wide = 80
+
+function! BindDebugKey()
+	nnoremap F9 :Break<CR>
+	nnoremap F10 :Over<CR>
+	nnoremap F11 :Step<CR>
+	nnoremap F5 :Continue<CR>
+endfunction
+
+autocmd FileType c,cpp call BindDebugKey()
 set nobackup
 
 "coc.nvim
