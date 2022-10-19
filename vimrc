@@ -45,27 +45,12 @@ let mapleader = ","
 "polyglot 要求放到加载之前
 "postscr跟ps冲突
 let g:polyglot_disable = ['postscr']
-"glsl
-"add vs ps as glsl
-autocmd BufNewFile,BufRead *.vs,*.ps,*.gs set ft=glsl
-autocmd BufNewFile,BufRead *.VS,*.PS,*.GS set ft=glsl
-
-function! BuildYCM(info)
-  " info is a dictionary with 3 fields
-  " - name:   name of the plugin
-  " - status: 'installed', 'updated', or 'unchanged'
-  " - force:  set on PlugInstall! or PlugUpdate!
-  if a:info.status == 'installed' || a:info.force
-    !./install.py --all
-  endif
-endfunction
 
 call plug#begin('~/.vim/plugged')
 "common
 	Plug 'sirver/ultisnips'
 	Plug 'honza/vim-snippets'
 
-	"Plug 'ycm-core/YouCompleteMe', { 'do': function('BuildYCM') }
 	Plug 'ludovicchabant/vim-gutentags',{'for':['c','cpp','java']}
 	Plug 'mhinz/vim-signify'
 	Plug 'kana/vim-textobj-user'
@@ -101,14 +86,14 @@ call plug#begin('~/.vim/plugged')
 	Plug 'pangloss/vim-javascript'
 	"python支持
 	"python语法高亮
-	Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins','for':'python'}
+	Plug 'davidhalter/jedi-vim', {'for':'python'}
 	Plug 'Vimjas/vim-python-pep8-indent'
 	"latex
 	Plug 'lervag/vimtex',{'for':'tex'}
 	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'neoclide/coc.nvim', {'branch': 'release','do':{ -> coc#util#install() }}
 	"glsl
-	"Plug 'tikhomirov/vim-glsl'
+	Plug 'tikhomirov/vim-glsl'
 	Plug 'mildred/vim-bufmru'
 	"git plugin
 	Plug 'tpope/vim-fugitive'
@@ -382,3 +367,9 @@ let g:neomake_open_list = 2
 
 set shiftwidth=4
 set tabstop=4
+
+"glsl
+"add vs ps as glsl
+autocmd BufNewFile,BufRead *.vs,*.ps,*.gs set ft=glsl
+autocmd BufNewFile,BufRead *.VS,*.PS,*.GS set ft=glsl
+
