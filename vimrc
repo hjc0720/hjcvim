@@ -90,8 +90,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'Vimjas/vim-python-pep8-indent'
 	"latex
 	Plug 'lervag/vimtex',{'for':'tex'}
-	"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-	Plug 'neoclide/coc.nvim', {'branch': 'release','do':{ -> coc#util#install() }}
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	"glsl
 	Plug 'tikhomirov/vim-glsl'
 	Plug 'mildred/vim-bufmru'
@@ -99,9 +98,9 @@ call plug#begin('~/.vim/plugged')
 	Plug 'tpope/vim-fugitive'
 	Plug 'hjc0720/qssvim'
 	"vue
-	Plug 'posva/vim-vue'
-	Plug 'vim-syntastic/syntastic',{'for':'vue'}
-	Plug 'MaraniMatias/vue-formatter',{'for':'vue'}
+	"Plug 'posva/vim-vue'
+	"Plug 'vim-syntastic/syntastic',{'for':'vue'}
+	"Plug 'MaraniMatias/vue-formatter',{'for':'vue'}
 	"md
 	Plug 'plasticboy/vim-markdown'
 	"生成md 目录
@@ -114,6 +113,8 @@ call plug#begin('~/.vim/plugged')
 	"启动界面
 	Plug 'mhinz/vim-startify'
 	Plug 'neomake/neomake'
+	"go 语言支持
+	Plug 'fatih/vim-go'
 	call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
@@ -358,6 +359,7 @@ nmap <leader>rn <Plug>(coc-rename)
 
 xmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 "md
 let g:vim_markdown_math = 1
 autocmd FileType markdown map <F5> :MarkdownPreview<CR>
