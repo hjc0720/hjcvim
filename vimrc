@@ -102,19 +102,21 @@ call plug#begin('~/.vim/plugged')
 	"Plug 'vim-syntastic/syntastic',{'for':'vue'}
 	"Plug 'MaraniMatias/vue-formatter',{'for':'vue'}
 	"md
-	Plug 'plasticboy/vim-markdown'
+	"Plug 'plasticboy/vim-markdown'
 	"生成md 目录
 	":GenTocMarked生成目录
 	":UpdateToc更新目录
-	Plug 'mzlogin/vim-markdown-toc'
+	"Plug 'mzlogin/vim-markdown-toc'
 	" 打开/关闭预览
 	":MarkdownPreviewToggel
-	Plug 'iamcco/markdown-preview.vim'
+	"Plug 'iamcco/markdown-preview.vim'
 	"启动界面
 	Plug 'mhinz/vim-startify'
-	Plug 'neomake/neomake'
 	"go 语言支持
 	Plug 'fatih/vim-go'
+	"cmake
+	Plug 'pboettch/vim-cmake-syntax'
+	Plug 'cdelledonne/vim-cmake'
 	call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
@@ -360,12 +362,6 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f <Plug>(coc-format-selected)
 nmap <leader>f <Plug>(coc-format-selected)
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-"md
-let g:vim_markdown_math = 1
-autocmd FileType markdown map <F5> :MarkdownPreview<CR>
-"neomake
-call neomake#configure#disable_automake()
-let g:neomake_open_list = 2
 
 set shiftwidth=4
 set tabstop=4
