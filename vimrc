@@ -146,25 +146,6 @@ endif
 "vim-signify
 set signcolumn=yes
 
-"ycm
-"let g:ycm_add_preview_to_completeopt=0
-""let g:ycm_show_diagnostics_ui=0
-"let g:ycm_server_log_level='info'
-"let g:ycm_min_num_identifier_candiadate_chars=2
-"let g:ycm_complete_in_strings = 1
-"let g:ycm_complete_in_comments = 1
-"let g:ycm_collect_identifiers_from_comments_and_strings=1
-"let g:ycm_key_invoke_completion='<C-k>'
-"let g:ycm_confirm_extra_conf = 0
-"set completeopt=menu,menuone
-"nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-"let g:ycm_semantic_triggers={
-			"\'c,cpp,python,java,go,perl':['re!\w{2}'],
-			"\'cs,lua,javascript':['re!\w{2}'],
-			"\}
-
-"noremap <c-z> <NOP>
 "leaderF
 let g:Lf_ShortcutF='<c-p>'
 let g:Lf_ShortcutB='<m-n>'
@@ -177,14 +158,9 @@ noremap <m-n> :LeaderfBuffer<cr>
 noremap <m-O> :LeaderfFile<cr>
 noremap <m-S> :LeaderfTag<cr>
 
-"let g:Lf_StlSeparator={'left':'','right':'','front':''}
-
 let g:Lf_WorkingDirectoryMode='Ac'
 let g:Lf_CachedDirectory=expand('~/.vim/cache')
 let g:Lf_ShowRelativePath=0
-"let g:Lf_HideHelp=1
-"let g:Lf_PreviewResult={'Function':0,'BufTag':0}
-
 
 "airline
 let g:airline_theme='dark'
@@ -204,19 +180,6 @@ let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 
-"ale
-"let g:ale_lint_on_text_changed='normal'
-"let g:ale_lint_on_insert_leave=1
-"let g_airline#externsion#ale#enabled=1
-"let g:ale_cpp_gcc_options='-Wall -O2 -std=c++17'
-"nmap <Leader>s :ALEToggle<CR>
-"let g:ale linters = {
-	"\ 'python': ['flake8', 'pylint'],
-	"\}
-
-"let g:ale_fixers = {
-			"\ 'python': [ 'yapf' ],
-			"\}
 "rainbow
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
@@ -316,6 +279,7 @@ nnoremap <Leader>o :A<CR>
 let g:syntastic_javascript_checkers=['eslint']
 "c++ lambda缩进不正确
 autocmd FileType cpp setlocal cino+=g-1,j1,(0,ws,Ws,N+s,t0,g0,+0
+
 function! ResetMakeprg()
 	let cpunum = system("grep -c ^processor /proc/cpuinfo ")
 	let &makeprg= 'make $* -j' . cpunum 
@@ -370,4 +334,23 @@ set tabstop=4
 "add vs ps as glsl
 autocmd BufNewFile,BufRead *.vs,*.ps,*.gs set ft=glsl
 autocmd BufNewFile,BufRead *.VS,*.PS,*.GS set ft=glsl
+
+"vim-cmake
+"
+let g:cmake_jump_on_error = 0 " We do not want to focus the console
+
+augroup vim-cmake-group
+	autocmd User CMakeBuildFailed cfirst
+	autocmd User CMakeBuildFailed CMakeClose
+augroup END
+
+augroup vim-cmake-group
+	autocmd User CMakeBuildSucceeded CMakeClose
+augroup END
+
+nmap <leader>mb <Plug>(CMakeBuild)
+nmap <leader>ms <Plug>(CMakeSwitch)
+nmap <leader>mq <Plug>(CMakeClose)
+let cpunum = system("grep -c ^processor /proc/cpuinfo ")
+let g:cmake_build_options= ['-j',str2nr(cpunum)]
 
