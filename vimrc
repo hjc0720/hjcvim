@@ -243,6 +243,7 @@ nmap <Leader>a: :Tabularize /:<CR>
 nmap <Leader>a: :Tabularize /:<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a<Space> :Tabularize /\S\+/<CR>
 
 "mattn/emmet-vim
 let g:user_emmet_install_global = 0
@@ -357,6 +358,8 @@ let g:cmake_build_options= ['-j',str2nr(cpunum)]
 "配合vim-cmake设置makeprg
 function! ResetMakeprg()
 	let l:root = asyncrun#get_root('%')
+	let l:buildPath = ""
+
 	"echo "l:root:" . l:root
 	if !empty(l:root)
 		let l:cmakeFile = findfile("CMakeLists.txt",l:root)
