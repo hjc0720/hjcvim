@@ -117,6 +117,8 @@ call plug#begin('~/.vim/plugged')
 	"cmake
 	Plug 'pboettch/vim-cmake-syntax'
 	Plug 'cdelledonne/vim-cmake'
+	"异步执行插件，内含工程根目录变量
+	Plug 'skywind3000/asyncrun.vim'
 	call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
@@ -280,12 +282,6 @@ let g:syntastic_javascript_checkers=['eslint']
 "c++ lambda缩进不正确
 autocmd FileType cpp setlocal cino+=g-1,j1,(0,ws,Ws,N+s,t0,g0,+0
 
-function! ResetMakeprg()
-	let cpunum = system("grep -c ^processor /proc/cpuinfo ")
-	let &makeprg= 'make $* -j' . cpunum 
-endfunction
-
-autocmd FileType c,cpp call ResetMakeprg()
 
 packadd termdebug
 let g:termdebug_wide = 80
@@ -345,6 +341,10 @@ augroup vim-cmake-group
 augroup END
 
 augroup vim-cmake-group
+	autocmd User CMakeBuildPre wa
+augroup END
+
+augroup vim-cmake-group
 	autocmd User CMakeBuildSucceeded CMakeClose
 augroup END
 
@@ -354,3 +354,27 @@ nmap <leader>mq <Plug>(CMakeClose)
 let cpunum = system("grep -c ^processor /proc/cpuinfo ")
 let g:cmake_build_options= ['-j',str2nr(cpunum)]
 
+"配合vim-cmake设置makeprg
+function! ResetMakeprg()
+	let l:root = asyncrun#get_root('%')
+	"echo "l:root:" . l:root
+	if !empty(l:root)
+		let l:cmakeFile = findfile("CMakeLists.txt",l:root)
+		"echo "l:cmakeFile:" . l:cmakeFile
+		if !empty(l:cmakeFile)
+			let l:buildDir = ["Debug","Release","Build","build"]
+			for l:dir in l:buildDir
+				let l:buildPath = finddir(l:dir, l:root)
+				"echo "l:buildPath:" . l:buildPath
+				if len(l:buildPath) > 0
+					break
+				endif	
+			endfor
+		endif
+	endif
+	let cpunum = system("grep -c ^processor /proc/cpuinfo ")
+	"echo "cur build path:" . l:buildPath
+	let &makeprg= 'make $* -C ' . l:buildPath . ' -j' . cpunum 
+endfunction
+
+autocmd FileType c,cpp call ResetMakeprg()
