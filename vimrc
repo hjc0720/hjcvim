@@ -155,10 +155,17 @@ let g:Lf_WindowPosition='popup'
 let g:Lf_PreviewInPopup = 1
 let g:Lf_DefaultMode='NameOnly'
 noremap <c-n> :LeaderfMrc<cr>
-noremap <m-m> :LeaderfFunction<cr>
-noremap <m-n> :LeaderfBuffer<cr>
-noremap <m-O> :LeaderfFile<cr>
-noremap <m-S> :LeaderfTag<cr>
+if has('gui_running')
+	noremap <m-m> :LeaderfFunction<cr>
+	noremap <m-n> :LeaderfBuffer<cr>
+	noremap <m-O> :LeaderfFile<cr>
+	noremap <m-S> :LeaderfTag<cr>
+else
+	noremap <leader>m :LeaderfFunction<cr>
+	noremap <leader>n :LeaderfBuffer<cr>
+	noremap <leader>O :LeaderfFile<cr>
+	noremap <leader>S :LeaderfTag<cr>
+endif
 
 let g:Lf_WorkingDirectoryMode='Ac'
 let g:Lf_CachedDirectory=expand('~/.vim/cache')
