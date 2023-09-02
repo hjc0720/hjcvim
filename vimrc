@@ -271,6 +271,7 @@ let g:vimtex_toc_config = {
 \ 'show_help' : 1,
 \ 'show_numbers' : 1,
 \}
+let g:vimtex_compiler_latexmk = {'build_dir': {-> expand("%:t:r")}}
 nnoremap <F3> :VimtexTocToggle<CR>
 let maplocalleader=","
 
