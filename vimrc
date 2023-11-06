@@ -1,5 +1,5 @@
 "some base setting
-set guifont=Monospace\ 9
+set guifont=DejaVu\ Sans\ Mono\ 9
 set tags=./.tags;,.tags
 set noshowmode
 set number
