@@ -271,14 +271,15 @@ let g:vimtex_toc_config = {
 \ 'show_help' : 1,
 \ 'show_numbers' : 1,
 \}
+let g:vimtex_compiler_latexmk_engines = {'_':'-xelatex'}
 let g:vimtex_compiler_latexmk = {'build_dir': {-> expand("%:t:r")}}
 nnoremap <F3> :VimtexTocToggle<CR>
 let maplocalleader=","
 
 "UltiSnips
-let g:UltiSnipsExpandTrigger='<c-e>'
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<tab>'
+let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
 "let g:UltiSnipsSnippetDirectories=['UltiSnips', 'plugged/vim-snippets/UltiSnips']
 let g:UltiSnipsEditSplit="vertical"
 "let g:UltiSnipsUsePythonVersion=3

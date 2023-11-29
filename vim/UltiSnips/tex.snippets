@@ -1,0 +1,74 @@
+snippet title "insert title" bi
+\def\TitleRep{${1:titleName}}
+\def\Logo{${2:logo.png}}
+%定义页眉页脚
+\pagestyle{fancy}
+\lhead{内部资料}
+\chead{\TitleRep}
+\rhead{\includegraphics[width=0.05\textwidth]{\Logo}}
+\lfoot{}
+\cfoot{${3:北京信尚智能科技有限公司}}
+\rfoot{\thepage}
+
+\title{
+	\rightline{\Large{内部资料\ 注意保密}}\par \centerline{\Huge{\TitleRep}}
+}
+\author{\includegraphics[width=0.5\textwidth]{\Logo}}
+
+\date{`date`}
+endsnippet
+
+snippet mydoc "for my doc init" bi
+\documentclass[a4paper]{article}
+\RequirePackage{amssymb,amsmath}
+\RequirePackage{ctex}
+\RequirePackage{indentfirst}
+\RequirePackage{fancyhdr}
+\RequirePackage{hyperref}
+\RequirePackage{float}
+\hypersetup{colorlinks=false}
+\RequirePackage{geometry}
+\geometry{left=2cm,right=2cm,top=2.5cm,bottom=2.5cm}
+\usepackage{tablefootnote}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{tabularx}
+
+\newcounter{modifyno}
+\newcommand\textVersion{\stepcounter{modifyno}\arabic{modifyno}}
+
+%插入图片
+\def\HInsertPic#1#2{
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=\textwidth]{#1}
+		\caption{#2}
+	\end{figure}
+}
+
+%table里手动添加换行
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
+%目录有红框的问题
+\hypersetup{colorlinks=true,linkcolor=black}
+endsnippet
+
+snippet modifytab "insert modify table" bi
+\begin{table}[!ht]
+\caption*{\Large{版本说明}}
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{序号}&\textbf{版本}&\textbf{修改日期}&\textbf{修改人}&\textbf{备注}\\
+		\hline
+			\hline
+
+			\end{tabular}
+			\end{table}
+endsnippet
+
+snippet insModify "insert modify record" b
+		\textVersion&{$1}&`date`&${2:黄建超}&$3\\
+		\hline
+endsnippet
