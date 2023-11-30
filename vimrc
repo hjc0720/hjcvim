@@ -382,6 +382,13 @@ function! ResetMakeprg()
 					break
 				endif	
 			endfor
+		else
+			let l:makefile = findfile("Makefile",l:root.'**')
+			if !empty(l:makefile)
+				let l:buildPath = fnamemodify(l:makefile,':p:h')
+			else
+				let l:buildPath = l:root
+			endif
 		endif
 	endif
 	let cpunum = system("grep -c ^processor /proc/cpuinfo ")
