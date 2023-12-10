@@ -257,8 +257,12 @@ let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 "latex
 let g:tex_flavor='latex'
+
+"let g:vimtex_view_general_viewer = 'okular'
+"let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+
 let g:vimtex_view_method='zathura'
-let g:vimtex_view_general_viewer='zathura'
+"let g:vimtex_view_general_viewer='zathura'
 let g:vimtex_quickfix_mode=0
 let conceallevel=1
 let g:tex_conceal='abdmg'
@@ -272,7 +276,21 @@ let g:vimtex_toc_config = {
 \ 'show_numbers' : 1,
 \}
 let g:vimtex_compiler_latexmk_engines = {'_':'-xelatex'}
-let g:vimtex_compiler_latexmk = {'build_dir': {-> expand("%:t:r")}}
+"let g:vimtex_compiler_latexmk = {'build_dir': {-> expand("%:t:r")}}
+let g:vimtex_compiler_latexmk = {
+        \ 'aux_dir' : '',
+        \ 'out_dir' : '',
+        \ 'callback' : 1,
+        \ 'continuous' : 1,
+        \ 'executable' : 'latexmk',
+        \ 'hooks' : [],
+        \ 'options' : [
+        \   '-verbose',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
 nnoremap <F3> :VimtexTocToggle<CR>
 let maplocalleader=","
 
