@@ -181,8 +181,8 @@ set laststatus=2
 
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
-nnoremap <c-tab> :BufMRUNext<CR>
-map <S-Tab> :BufMRUPrev<CR>
+nmap <c-Tab> :BufMRUNext<CR>
+nmap <S-Tab> :BufMRUPrev<CR>
 
 "cpp highlight
 let g:cpp_class_scope_highlight = 1

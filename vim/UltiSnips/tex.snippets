@@ -15,7 +15,7 @@ snippet title "insert title" bi
 }
 \author{\includegraphics[width=0.5\textwidth]{\Logo}}
 
-\date{`date`}
+\date{`date +%x`}
 endsnippet
 
 snippet mydoc "for my doc init" bi
@@ -34,6 +34,7 @@ snippet mydoc "for my doc init" bi
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{tabularx}
+\usepackage[dvipsnames]{xcolor} 
 
 \newcounter{modifyno}
 \newcommand\textVersion{\stepcounter{modifyno}\arabic{modifyno}}
@@ -52,6 +53,19 @@ snippet mydoc "for my doc init" bi
 
 %目录有红框的问题
 \hypersetup{colorlinks=true,linkcolor=black}
+
+%代码设置
+\lstset{
+    basicstyle=\tt\small,
+    keywordstyle=\color{green}\bfseries,
+    identifierstyle=\color{brown!80!black},
+    commentstyle=\color{gray},
+	stringstyle=\color{red!100},
+    showstringspaces=false,
+	breaklines=true,
+	numbers=left,
+	backgroundcolor=\color{yellow!5},
+}
 endsnippet
 
 snippet modifytab "insert modify table" bi
@@ -62,8 +76,6 @@ snippet modifytab "insert modify table" bi
 \hline
 \textbf{序号}&\textbf{版本}&\textbf{修改日期}&\textbf{修改人}&\textbf{备注}\\
 		\hline
-			\hline
-
 			\end{tabular}
 			\end{table}
 endsnippet
@@ -72,3 +84,46 @@ snippet insModify "insert modify record" b
 		\textVersion&{$1}&`date`&${2:黄建超}&$3\\
 		\hline
 endsnippet
+
+snippet mytable "my table" b
+	\begin{table}[H]
+	\centering
+	\begin{tabularx}{\textwidth}{${1:c}}
+	\hline
+	$0
+	\end{tabularx}
+	\end{table}
+endsnippet
+
+snippet code "input code"
+\begin{lstlisting}[language=${1:C}]
+$0
+\end{lstlisting}
+endsnippet
+
+snippet mbox "mbox"  i
+\mbox{${VISUAL}}
+endsnippet
+
+global !p
+def add_row(snip):
+	row_len = int(''.join(s for s in snip.buffer[snip.line] if s.isdigit()))
+	old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind('\t') + 1]
+	snip.buffer[snip.line] = ''
+	final_str = old_spacing
+	final_str += " & ".join(['$' + str(j + 1) for j in range(row_len)])
+	final_str += " \\\\\\"
+	final_str += "\n\\hline"
+	snip.expand_anon(final_str)
+endglobal
+
+pre_expand "add_row(snip)"
+snippet "td(\d+)" "Add table row of dimension with hline" r
+endsnippet
+
+snippet textcolor "set text color" i
+\textcolor{${1}}{${VISUAL}}
+endsnippet
+	
+
+# vim:ft=snippets:
