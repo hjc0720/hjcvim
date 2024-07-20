@@ -151,16 +151,16 @@ set signcolumn=yes
 
 "leaderF
 let g:Lf_ShortcutF='<c-p>'
-let g:Lf_ShortcutB='<m-n>'
+let g:Lf_ShortcutB='<A-n>'
 let g:Lf_WindowPosition='popup'
 let g:Lf_PreviewInPopup = 1
 let g:Lf_DefaultMode='NameOnly'
-noremap <c-n> :LeaderfMrc<cr>
+noremap <c-n> :LeaderfMru<cr>
 if has('gui_running')
-	noremap <m-m> :LeaderfFunction<cr>
-	noremap <m-n> :LeaderfBuffer<cr>
-	noremap <m-O> :LeaderfFile<cr>
-	noremap <m-S> :LeaderfTag<cr>
+	noremap <A-m> :LeaderfFunction<cr>
+	noremap <A-n> :LeaderfBuffer<cr>
+	noremap <A-O> :LeaderfFile<cr>
+	noremap <A-S> :LeaderfTag<cr>
 else
 	noremap <leader>m :LeaderfFunction<cr>
 	noremap <leader>n :LeaderfBuffer<cr>
@@ -303,7 +303,7 @@ let g:UltiSnipsJumpBackwardTrigger='<S-tab>'
 let g:UltiSnipsEditSplit="vertical"
 "let g:UltiSnipsUsePythonVersion=3
 "a.vim
-nnoremap <silent> <m-o> :A<CR>
+nnoremap <silent> <A-o> :A<CR>
 nnoremap <Leader>o :A<CR>
 
 "vue
