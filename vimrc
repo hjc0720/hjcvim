@@ -119,6 +119,7 @@ call plug#begin('~/.vim/plugged')
 	Plug 'cdelledonne/vim-cmake'
 	"异步执行插件，内含工程根目录变量
 	Plug 'skywind3000/asyncrun.vim'
+	Plug 'puremourning/vimspector'
 	call plug#end()
 " scrooloose/nerdcommenter 
 "<leader>cc   加注释
@@ -360,7 +361,6 @@ autocmd BufNewFile,BufRead *.vs,*.ps,*.gs set ft=glsl
 autocmd BufNewFile,BufRead *.VS,*.PS,*.GS set ft=glsl
 
 "vim-cmake
-"
 let g:cmake_jump_on_error = 0 " We do not want to focus the console
 
 augroup vim-cmake-group
@@ -415,3 +415,6 @@ function! ResetMakeprg()
 endfunction
 
 autocmd FileType c,cpp call ResetMakeprg()
+
+"vimspector配置文件 
+let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
