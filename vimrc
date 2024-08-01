@@ -1,5 +1,7 @@
 "some base setting
 set guifont=DejaVu\ Sans\ Mono\ 9
+set guioptions-=m
+set guioptions-=T
 set tags=./.tags;,.tags
 set noshowmode
 set number
