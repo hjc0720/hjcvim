@@ -420,3 +420,4 @@ autocmd FileType c,cpp call ResetMakeprg()
 
 "vimspector配置文件 
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+nnoremap <Leader>gr :call vimspector#Reset()<CR>
