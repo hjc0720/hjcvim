@@ -11,7 +11,7 @@ set history=1000
 set nocompatible
 filetype plugin indent on
 set encoding=utf-8
-set fileencodings=ucs-bom,utf-bom,utf-8,cp936,big5,gbk,utf16
+set fileencodings=ucs-bom,utf-bom,utf-8,cp936,big5,gbk
 set hidden
 set showmatch
 "search
@@ -185,7 +185,9 @@ set laststatus=2
 nnoremap [b :bp<CR>
 nnoremap ]b :bn<CR>
 nmap <c-Tab> :BufMRUNext<CR>
+nmap <leader>bn :BufMRUNext<CR>
 nmap <S-Tab> :BufMRUPrev<CR>
+nmap <leader>bp :BufMRUPrev<CR>
 
 "cpp highlight
 let g:cpp_class_scope_highlight = 1
@@ -326,6 +328,7 @@ endfunction
 
 autocmd FileType c,cpp call BindDebugKey()
 set nobackup
+set nowritebackup
 
 "coc.nvim
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
